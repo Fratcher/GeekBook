@@ -2,24 +2,76 @@ from django.db import models
 from django.urls import reverse # Used in get_absolute_url() to get URL for specified ID
 from django.db.models import UniqueConstraint # Constrains fields to unique values
 from django.db.models.functions import Lower # Returns lower cased value of field
-
+from django.contrib.auth.models import User #imports User
 
 # Create your models here.
-class Image(models.Model):
-    '''Model representing an Image'''
-    name = models.CharField(max_length=100)
-    image = models.ImageField(
-        upload_to='images/'
-    )
+class Book(models.Model):
+    'Model representing a book'
+    year = models.IntegerField(
+        unique =True,
+        help_text='Enter a year (e.g. 1999, 2001, 2024, etc.)'
+        )
+    def __str__(self):
+        return str(self.year)
+    
+    def get_absolute_url(self):
+        """Returns the url to access a particular year instance."""
+        return reverse('year-detail', args=[str(self.id)])
+
+class Month(models.Model):
+    'Model defining the month of the year'
+    name = models.CharField(max_length=20)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+
     def __str__(self):
         return self.name
     
     def get_absolute_url(self):
+        """Returns the url to access a particular month instance."""
+        return reverse('month-detail', args=[str(self.id)])
+    
+class Day(models.Model):
+    date = models.DateField()
+    month = models.ForeignKey(Month, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.date)
+    
+    def get_absolute_url(self):
+        """Returns the url to access a particular day instance."""
+        return reverse('day-detail', args=[str(self.id)])
+
+
+
+class Image(models.Model):
+    day = models.ForeignKey(Day, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    desc = models.CharField(max_length=400)
+    image = models.ImageField(upload_to='photos/')
+
+    def __str__(self):
+        return self.image.url
+
+    def get_absolute_url(self):
         """Returns the url to access a particular image instance."""
         return reverse('image-detail', args=[str(self.id)])
 
+class Video(models.Model):
+    day = models.ForeignKey(Day, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    desc = models.CharField(max_length=400)
+    video = models.FileField(upload_to='videos/')
 
-class Year(models.Model):
+    def __str__(self):
+        return self.video.url
+
+    def get_absolute_url(self):
+        """Returns the url to access a particular video instance."""
+        return reverse('video-detail', args=[str(self.id)])
+
+
+
+'''class Year(models.Model):
     """Model representing a year."""
     name = models.IntegerField(
         unique=True,
@@ -41,9 +93,9 @@ class Year(models.Model):
                 name='year_name_case_insensitive_unique',
                 violation_error_message = "Year already exists (case insensitive match)"
             ),
-        ]
+        ]'''
 
-class Description(models.Model):
+'''class Description(models.Model):
     """Model representing a Description."""
     desc = models.CharField(max_length=400)
     author = models.ForeignKey('Author', on_delete=models.RESTRICT, null=True)
@@ -68,9 +120,9 @@ class Description(models.Model):
 
     def get_absolute_url(self):
         """Returns the URL to access a detail record for this book."""
-        return reverse('desc-detail', args=[str(self.id)])
+        return reverse('desc-detail', args=[str(self.id)])'''
 
-class Author(models.Model):
+'''class Author(models.Model):
     """Model representing an author."""
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
@@ -86,4 +138,4 @@ class Author(models.Model):
 
     def __str__(self):
         """String for representing the Model object."""
-        return f'{self.last_name}, {self.first_name}'
+        return f'{self.last_name}, {self.first_name}'''
