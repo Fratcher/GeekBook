@@ -5,6 +5,20 @@ from django.db.models.functions import Lower # Returns lower cased value of fiel
 
 
 # Create your models here.
+class Image(models.Model):
+    '''Model representing an Image'''
+    name = models.CharField(max_length=100)
+    image = models.ImageField(
+        upload_to='images/'
+    )
+    def __str__(self):
+        return self.name
+    
+    def get_absolute_url(self):
+        """Returns the url to access a particular image instance."""
+        return reverse('image-detail', args=[str(self.id)])
+
+
 class Year(models.Model):
     """Model representing a year."""
     name = models.IntegerField(
