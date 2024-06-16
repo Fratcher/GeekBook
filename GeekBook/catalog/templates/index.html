@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Local Library Home</h1>
+  <p>
+    Welcome to GeekBook, a website developed by
+    <em>Riley King</em>!
+  </p>
+  <h2>Dynamic content</h2>
+  <p>The Geeks have the following record counts:</p>
+  <ul>
+    <li><strong>Books:</strong> {{ num_books }}</li>
+    <li><strong>Months:</strong> {{ num_instances }}</li>
+    <li><strong>Images:</strong> {{ num_image }}</li>
+  </ul>
+{% endblock %}
