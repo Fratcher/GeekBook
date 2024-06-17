@@ -6,7 +6,16 @@
     Welcome to GeekBook, a website developed by
     <em>Riley King</em>!
   </p>
-  <h2>Dynamic content</h2>
+  <h2>The Geek Squad</h2>
+  <div class="team-container">
+    {% for member in team %}
+    <div class="team-member">
+      <img class="member-image" src="{{ member.image_url }}" alt="{{ member.name }}">
+      <h2 class="member-name">{{ member.name }}</h2>
+    </div>
+    {% endfor %}
+  </div>
+  </div>
   <p>The Geeks have the following record counts:</p>
   <ul>
     <li><strong>Books:</strong> {{ num_books }}</li>

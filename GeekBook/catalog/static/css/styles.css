@@ -2,5 +2,25 @@
     margin-top: 20px;
     padding: 0;
     list-style: none;
-  }
+}
+
+
+.team-container {
+  display: flex;  /* This will make the children of team-container (the team-member divs) sit next to each other */
+  flex-wrap: wrap
+}
+
+.team-member {
+  flex: 1;  /* This will make each team-member div grow and shrink equally as per the available space */
+  margin: 5px;  /* Add some margin around each team-member div */
+  text-align: center;  /* Center the content */
+}
+
+.member-image {
+  width: 100%;  /* Make the image take up the full width of the team-member div */
+  height: auto;  /* Allow the height to adjust automatically based on the width */
+}
+
+.member-name{
   
+}
