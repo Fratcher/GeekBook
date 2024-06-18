@@ -22,6 +22,9 @@ from django.views.generic import RedirectView
 # Use static() to add URL mapping to serve static files during development (only)
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth.decorators import login_required
+from django.views.generic import TemplateView
+
 
 
 
@@ -31,8 +34,11 @@ urlpatterns = [
     path('catalog/', include('catalog.urls')),
 
     path('', RedirectView.as_view(url='catalog/')),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
+    path('accounts/', include('django.contrib.auth.urls')),
+
+    path('accounts/profile/', login_required(TemplateView.as_view(template_name='profile.html')), name='user_profile'),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
