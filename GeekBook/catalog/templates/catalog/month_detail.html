@@ -1,14 +1,14 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <h1>Year: {{ book.year }}</h1>
+  <h1>Month: {{ month.name }}</h1>
   <div style="margin-left:20px;margin-top:20px">
     <div style="margin-left:20px;margin-top:20px">
-      <h4>Months</h4>
+      <h4>Days</h4>
   
-      {% for month in book.month_set.all %}
+      {% for day in month.day_set.all %}
       <li>
-        <a href="{{ month.get_absolute_url }}">{{ month.name }}</a>
+        <a href="{{ month.get_absolute_url }}">{{ day.date }}</a>
       </li>
       {% endfor %}
     </div>
