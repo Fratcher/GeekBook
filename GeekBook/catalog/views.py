@@ -33,11 +33,11 @@ def index(request):
     num_image= Image.objects.count()
 
     team = [
-        {'name': 'Riley King', 'role': 'Member 1', 'image_url': '/static/images/member1.jpg'},
-        {'name': 'Rachel Strober', 'role': 'Member 2', 'image_url': '/static/images/member1.jpg'},
-        {'name': 'Piper Smith', 'role': 'Member 3', 'image_url': '/static/images/member1.jpg'},
-        {'name': 'Sara Morgan', 'role': 'Member 4', 'image_url': '/static/images/member1.jpg'},
-        {'name': 'Myrie Murphy', 'role': 'Member 5', 'image_url': '/static/images/member1.jpg'},
+        {'name': 'Riley King', 'role': 'Member 6', 'image_url': '/static/images/member6.jpg'},
+        {'name': 'Rachel Strober', 'role': 'Member 2', 'image_url': '/static/images/member2.jpg'},
+        {'name': 'Piper Smith', 'role': 'Member 3', 'image_url': '/static/images/member3.jpg'},
+        {'name': 'Sara Morgan', 'role': 'Member 4', 'image_url': '/static/images/member4.jpg'},
+        {'name': 'Myrie Murphy', 'role': 'Member 5', 'image_url': '/static/images/member5.jpg'},
         # Add more team members as needed...
     ]
 
@@ -63,6 +63,9 @@ class BookListView(generic.ListView):
 class BookDetailView(generic.DetailView):
     model = Book
 
+class MonthDetailView(generic.DetailView):
+    model = Month
+
 
 @login_required
 def profile(request, username=None):
@@ -76,4 +79,5 @@ def profile(request, username=None):
         'post_owner': post_owner,
       }
     return render(request, 'profile.html', args1)
+
 
