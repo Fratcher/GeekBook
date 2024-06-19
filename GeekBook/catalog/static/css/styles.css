@@ -1,9 +1,6 @@
-.sidebar-nav {
-    margin-top: 20px;
-    padding: 0;
-    list-style: none;
+.navbarNav{
+  color:aliceblue;
 }
-
 
 .team-container {
   display: flex;  /* This will make the children of team-container (the team-member divs) sit next to each other */
@@ -30,8 +27,7 @@
   display: inline;
 }
 #logout-form button {
-  padding: 0;
-  margin: 0;
+  font-weight:bold;
 }
 
 .user-info {
